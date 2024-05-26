@@ -38,6 +38,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on("userPicked", (question, choice) => {
+    console.log("Question recieved")
     questions.forEach((eQuestion) => {
       if (eQuestion.question == question) {
         if (eQuestion.correct == choice) {

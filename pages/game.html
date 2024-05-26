@@ -47,34 +47,31 @@
             lister.textContent = obj.name + " | " + obj.points + " points.";
             
             list.appendChild(lister);
-        });
+        })
 
         socket.on("skibidiQuestions", (obj) => {
-            console.log(obj)
             textId.value = obj[0];
 
             for(let i = 0; i < obj[1].length; i++) {
-                console.log(i)
                 document.getElementById("question" + (i + 1)).value = obj[1][i]
-                document.getElementById("option" + (i + 1)).addEventListener("click", ()=> {
-                    socket.emit("userPicked", (textId.value, obj[1][i]))
-                })
-            }
 
-            button1.addEventListener("click", () => {
-                socket.emit("userpicked", (textId.value, obj))
-            })
+                document.getElementById("option" + (i + 1)).addEventListener("click", () => {
+                    console.log(obj)
+                    socket.emit("userPicked", textId.value, obj[1][i])
+                });
+            }
         });
         
         socket.on("awardPoints", (obj) => {
+            console.log(obj)
             const liElements = list.querySelectorAll('li');
 
-        // Log the LI elements
-        liElements.forEach((li) => {
-            console.log(li.textContent);
-            li.textContent = obj.name + " | " + obj.points + " points.";
-
-        });
+            // Log the LI elements
+            liElements.forEach((li) => {
+                if (li.textContent.startsWith(obj.name)) {
+                    li.textContent = obj.name + " | " + obj.points + " points.";
+                }
+            });
         })
     </script>
 </html>
