@@ -17,7 +17,7 @@
             </div>
             <div class="multiple-choice">
                 <p>OPTIONS:</p>
-                <div>A</div><button id="option1"><textarea id="questions" rows = 5 cols="5" disabled></textarea></button>
+                <div>A</div><button id="option1"><textarea id="question1" rows = 5 cols="5" disabled></textarea></button>
                 <div>B</div><button id="option2"><textarea id="question2" rows = 5 cols="5" disabled></textarea></button>
                 <div>C</div><button id="option3"><textarea id="question3" rows = 5 cols="5" disabled></textarea></button>
                 <div>D</div><button id="option4"><textarea id="question4" rows = 5 cols="5" disabled></textarea></button>
@@ -50,16 +50,18 @@
         });
 
         socket.on("skibidiQuestions", (obj) => {
-            textId.value = obj.question;
+            console.log(obj)
+            textId.value = obj[0];
 
-            for(let i = 0; i < obj.answers.length; i++) {
-                document.getElementById("questions" + (i + 1)).value = obj.answers[i]
+            for(let i = 0; i < obj[1].length; i++) {
+                console.log(i)
+                document.getElementById("question" + (i + 1)).value = obj[1][i]
                 document.getElementById("option" + (i + 1)).addEventListener("click", ()=> {
-                    socket.emit("userPicked", (textId.value, obj.answers[i]))
+                    socket.emit("userPicked", (textId.value, obj[1][i]))
                 })
             }
 
-            button1.addEventListener("click", ()=> {
+            button1.addEventListener("click", () => {
                 socket.emit("userpicked", (textId.value, obj))
             })
         });

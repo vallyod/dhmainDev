@@ -225,5 +225,5 @@ setInterval(() => {
     answers = possibleAnswers
   ]
   
-  io.emit(tempArray)
+  io.emit("skibidiQuestions", tempArray)
 }, 5000);
