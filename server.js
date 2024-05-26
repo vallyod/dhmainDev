@@ -36,7 +36,7 @@ app.ws('/socket', function(ws, req) {
 
   // Leaving
   ws.on('close', () => {
-    clients.delete(object);
+    clients.delete(user);
     user.removing = true
 
     for (const client of clients) {
