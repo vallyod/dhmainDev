@@ -7,11 +7,11 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-app.use(express.static('public'))
+//app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   //res.sendFile('public/FP.html');
-  res.sendFile(join(__dirname, 'public', 'index.html'));
+  res.sendFile(join(__dirname, 'public', 'FP.html'));
 });
 
 io.on('connection', (socket) => {
