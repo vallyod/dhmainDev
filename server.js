@@ -15,6 +15,16 @@ app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'pages', 'login.html'));
 });
 
+app.get('/game', (req, res) => {
+  //res.sendFile('public/FP.html');
+  res.sendFile(join(__dirname, 'pages', 'login.html'));
+});
+
+app.get('/game', (req, res) => {
+  //res.sendFile('public/FP.html');
+  res.sendFile(join(__dirname, 'pages', 'login.html'));
+});
+
 var clients = new Set()
 io.on('connection', (socket) => {
   // Create user
