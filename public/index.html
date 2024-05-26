@@ -9,8 +9,11 @@
         <h1>THIS IS DJCC GAME - <img src="funny-man-watermelon-helmet-googles-260nw-157354478.webp"/></h1>
         <ul id="list"></ul>
     </body>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
+        const list = document.getElementById("list");
+        //const ws = new WebSocket('ws://localhost:3000/socket');
 
         ws.addEventListener('open', () => {
             console.log("WebSocket connection established")
