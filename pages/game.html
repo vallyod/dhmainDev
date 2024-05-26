@@ -7,20 +7,20 @@
     </head>
     <body>
         <div id="crest">
-            <h1>DJCC Gameshow</h1>
+            <h1>DJCC'S Gameshow</h1>
             <img src="funny-man-watermelon-helmet-googles-260nw-157354478.webp" width="100" height="100"/>
         </div>
 
         <div id="question-section">
             <div class="question-box">
-                <textarea id="question" rows="4" cols="50" placeholder="Enter your question here..."></textarea>
+                <textarea id="question" rows = 20 cols="30" disabled></textarea>
             </div>
             <div class="multiple-choice">
-                <p>Multiple Choice Options:</p>
-                <button id="option1">A</button>
-                <button id="option2">B</button>
-                <button id="option3">C</button>
-                <button id="option4">D</button>
+                <p>OPTIONS:</p>
+                <div>A</div><button id="option1"><textarea id="questions" rows = 5 cols="5" disabled></textarea></button>
+                <div>B</div><button id="option2"><textarea id="question2" rows = 5 cols="5" disabled></textarea></button>
+                <div>C</div><button id="option3"><textarea id="question3" rows = 5 cols="5" disabled></textarea></button>
+                <div>D</div><button id="option4"><textarea id="question4" rows = 5 cols="5" disabled></textarea></button>
             </div>
         </div>
         <ul id="list"></ul>
@@ -29,6 +29,11 @@
     <script>
         const socket = io();
         const list = document.getElementById("list");
+        const textId = document.getElementById("question");
+        const button1 = document.getElementById("option1");
+        const button2 = document.getElementById("option2");
+        const button3 = document.getElementById("option3");
+        const button4 = document.getElementById("option4");
         
         let name = ""
         while (name == "" || !name) {
@@ -43,6 +48,15 @@
             
             list.appendChild(lister);
             
+
+        });
+
+        socket.on("skibidiQuestions", (obj) => {
+            textId.value = obj.question;
+
+            for(let i = 0; i < obj.answers.length; i++) {
+                document.getElementById("questions" + (i + 1)) = obj.answers[i]
+            }
         });
     </script>
 </html>
