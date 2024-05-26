@@ -6,3 +6,22 @@ body{
 h1{
     color: blue;
 }
+
+/*#list { list-style-type: none; margin: 0; padding: 0; }
+#list > li { padding: 0.5rem 1rem; }
+#list > li:nth-child(odd) { background: #efefef; }*/
+
+#list {
+    display: flex;
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+#list li {
+    margin-right: 20px; /* Add spacing between items */
+    /* Optional styles for list items */
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: #f0f0f0;
+}
