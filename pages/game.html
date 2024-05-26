@@ -39,7 +39,7 @@
 
         socket.on("userJoined", (obj) => {
             const lister = document.createElement("li");
-            lister.textContent = obj.name + " |" + obj.points + " points";
+            lister.textContent = obj.name + " | " + obj.points + " points.";
             
             list.appendChild(lister);
             
