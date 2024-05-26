@@ -15,7 +15,7 @@ app.get('/',  (req, res) => {
 
 app.ws('/socket', function(ws, req) {
   // Create user
-  const user = new Object();
+  var user = new Object();
   user.webSocket = ws
   user.name = "placeholder"
   user.image = "image placeholder"
@@ -23,7 +23,7 @@ app.ws('/socket', function(ws, req) {
 
   // Tell clients new client joined
   for (const client of clients) {
-    client.send(user)
+    client.webSocket.send(user)
   }
 
   // Add new client to clients
