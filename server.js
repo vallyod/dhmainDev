@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.get('/game', (req, res) => {
   //res.sendFile('public/FP.html');
-  res.sendFile(join(__dirname, 'pages', 'login.html'));
+  res.sendFile(join(__dirname, 'pages', 'game.html'));
 });
 
 app.get('/game', (req, res) => {
@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
   user.image = "image placeholder"
 
   // Tell clients new client joined
-  socket.emit("userJoined", user)
+  socket.emit("userJoined", user);
 
   // For recieving answers
   socket.on('answer', function(msg) {

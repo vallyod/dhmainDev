@@ -7,20 +7,22 @@
     </head>
     <body>
         <h1>SIGN UP</h1>
-        <div>
+        <div class="centered">
             <label for="text">USERNAME: </label>
             <input id="text" autocomplete="off"/><button id="button">ENTER</button>
         </div>
 
         <script src="/socket.io/socket.io.js"></script>
         <script>
+            const socket = io();
             const input = document.getElementById("text");
-            const button = button.getElementById("button");
-            button.addEventListener(
-                /*if(input.value !=""){
-                    window.location.href = "index.html"
-                }*/
-            );
+            const button = document.getElementById("button");
+            button.addEventListener('click', () => {
+                if(input.value != ""){
+                    window.location.href = "\game";
+                }
+                socket.emit("newuser", input.value);
+            });
         </script>
     </body>
  </html>
