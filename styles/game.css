@@ -34,6 +34,10 @@ h1 {
     background-color: #f0f0f0;
 }
 
+#something{
+    color: beige;
+}
+
 img {
     display: block;
     margin: 0 auto;
@@ -64,6 +68,7 @@ img {
     z-index: -1;
     pointer-events: none;
     animation: moveStars 50s linear infinite;
+    color: beige;
 }
 
 @keyframes moveStars {
