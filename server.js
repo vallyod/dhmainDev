@@ -8,6 +8,7 @@ const server = createServer(app);
 const io = new Server(server);
 
 app.use(express.static('public'))
+app.use(express.static('styles'))
 
 app.get('/', (req, res) => {
   //res.sendFile('public/FP.html');
