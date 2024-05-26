@@ -10,7 +10,7 @@
         <ul id="list"></ul>
     </body>
     <script>
-        const list = document.getElementById(list);
+        const list = document.getElementById("list");
         const dick = new WebSocket('ws://localhost:3000/socket')
 
         dick.addEventListener('open', () => {
@@ -18,7 +18,7 @@
             //ws.send("message")
         })
 
-        ws.addEventListener('message', (event) => {
+        dick.addEventListener('message', (event) => {
             const lister = document.createElement("li");
             const client = event.data
             lister.textContent = client.name;
