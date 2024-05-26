@@ -37,4 +37,5 @@ img {
     display: block;
     margin: 0 auto; /* Center the image horizontally */
     margin-top: 10px; /* Adjust margin as needed */
+    border-radius: 50%; /* Make the image circular */
 }
