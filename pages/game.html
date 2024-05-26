@@ -17,10 +17,10 @@
             </div>
             <div class="multiple-choice">
                 <p>OPTIONS:</p>
-                <div>A</div><button id="option1"><textarea id="question1" rows = 5 cols="5" disabled></textarea></button>
-                <div>B</div><button id="option2"><textarea id="question2" rows = 5 cols="5" disabled></textarea></button>
-                <div>C</div><button id="option3"><textarea id="question3" rows = 5 cols="5" disabled></textarea></button>
-                <div>D</div><button id="option4"><textarea id="question4" rows = 5 cols="5" disabled></textarea></button>
+                <div>A</div> <input type="button" id="option1" value="">
+                <div>B</div> <input type="button" id="option2" value="">
+                <div>C</div> <input type="button" id="option3" value="">
+                <div>D</div> <input type="button" id="option4" value="">
             </div>
         </div>
         <ul id="list"></ul>
@@ -53,7 +53,7 @@
             textId.value = obj[0];
 
             for(let i = 0; i < obj[1].length; i++) {
-                document.getElementById("question" + (i + 1)).value = obj[1][i]
+                document.getElementById("option" + (i + 1)).value = obj[1][i]
 
                 document.getElementById("option" + (i + 1)).addEventListener("click", () => {
                     console.log(obj)
