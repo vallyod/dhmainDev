@@ -7,20 +7,19 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-//app.use(express.static('public'))
+app.use(express.static('public'))
+app.use(express.static('styles'))
 
 app.get('/', (req, res) => {
   //res.sendFile('public/FP.html');
-  res.sendFile(join(__dirname, 'public', 'FP.html'));
+  res.sendFile(join(__dirname, 'pages', 'game.html'));
 });
 
 var clients = new Set()
 io.on('connection', (socket) => {
-  console.log('a user connected');
-
   // Create user
   var user = new Object();
-  user.socket = socket
+  //user.socket = socket
   user.name = "placeholder"
   user.image = "image placeholder"
 
