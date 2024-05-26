@@ -27,6 +27,7 @@
         <div id="question-section">
             <div class="question-box">
                 <textarea id="question" rows="20" cols="30" disabled></textarea>
+                <textarea id="question" rows="20" cols="30" disabled></textarea>
             </div>
             <div class="multiple-choice">
                 <p>OPTIONS:</p>
@@ -37,23 +38,22 @@
             </div>
         </div>
         <ul id="list"></ul>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const list = document.getElementById("list");
+        const textId = document.getElementById("question");
+        
+        let name = ""
+        while (name == "" || !name) {
+            name = prompt('Enter name');
+        }
 
-        <script src="/socket.io/socket.io.js"></script>
-        <script>
-            const socket = io();
-            const list = document.getElementById("list");
-            const textId = document.getElementById("question");
-            const button1 = document.getElementById("option1");
-            const button2 = document.getElementById("option2");
-            const button3 = document.getElementById("option3");
-            const button4 = document.getElementById("option4");
-            
-            let name = "";
-            while (name === "" || !name) {
-                name = prompt('Enter name');
-            }
+        socket.emit("newUser", name);
 
-            socket.emit("newUser", name);
+        // Set to store answered questions
+        let answeredQuestions = new Set();
 
             socket.on("userJoined", (obj) => {
                 const lister = document.createElement("li");
@@ -62,22 +62,37 @@
                 list.appendChild(lister);
             });
 
-            socket.on("skibidiQuestions", (obj) => {
-                textId.value = obj[0];
-
-                for (let i = 0; i < obj[1].length; i++) {
-                    document.getElementById("option" + (i + 1)).value = obj[1][i];
-
-                    document.getElementById("option" + (i + 1)).addEventListener("click", () => {
-                        console.log(obj);
-                        socket.emit("userPicked", textId.value, obj[1][i]);
-                    });
-                }
+        socket.on("skibidiQuestions", (obj) => {
+            textId.value = obj[0];
+        
+            // Remove previous event listeners
+            document.querySelectorAll('.multiple-choice input[type="button"]').forEach(button => {
+                button.removeEventListener('click', handleClick);
             });
-            
-            socket.on("awardPoints", (obj) => {
-                console.log(obj);
-                const liElements = list.querySelectorAll('li');
+
+            for (let i = 0; i < obj[1].length; i++) {
+                const optionElement = document.getElementById("option" + (i + 1));
+                optionElement.value = obj[1][i];
+
+                // Add event listener
+                optionElement.addEventListener("click", handleClick);
+            }
+        });
+
+        // Event listener function
+        function handleClick() {
+            const option = this.value;
+            const question = textId.value;
+
+            // Check if the question has already been answered
+            if (!answeredQuestions.has(question)) {
+                socket.emit("userPicked", question, option);
+                answeredQuestions.add(question); // Add the question to the set of answered questions
+            }
+        }
+        
+        socket.on("awardPoints", (obj) => {
+            const liElements = list.querySelectorAll('li');
 
                 liElements.forEach((li) => {
                     if (li.textContent.startsWith(obj.name)) {

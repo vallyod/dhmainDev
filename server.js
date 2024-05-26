@@ -38,7 +38,6 @@ io.on("connection", (socket) => {
   })
 
   socket.on("userPicked", (question, choice) => {
-    console.log("Question recieved")
     questions.forEach((eQuestion) => {
       if (eQuestion.question == question) {
         if (eQuestion.correct == choice) {
@@ -197,10 +196,10 @@ var questions = [
       answers: [
           "(a)sin(b+c)",
           "(1/2)(base)(height)",
-          "12×|→AB|×|→AC|×sin θ",
+          "12x|→AB|x|→AC|xsin θ",
           "(1/2)(a)(b)sin(C)"
       ],
-      correct: "12×|→AB|×|→AC|×sin θ"
+      correct: "12x|→AB|x|→AC|xsin θ"
   },
   {
       question: "What is the derivative of sec^2(x)?",
