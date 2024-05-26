@@ -7,8 +7,10 @@
     </head>
     <body>
         <h1>THIS IS DJCC GAME - <img src="funny-man-watermelon-helmet-googles-260nw-157354478.webp"/></h1>
+        <ul id="list"></ul>
     </body>
     <script>
+        const list = document.getElementById(list);
         const dick = new WebSocket('ws://localhost:3000/socket')
 
         dick.addEventListener('open', () => {
@@ -16,8 +18,11 @@
             //ws.send("message")
         })
 
-        ws.addEventListener('message', (event) => {
-            const message = JSON.parse(event.data)
+        ws.addEventListener('userjoined', (event) => {
+            const list = document.createElement("li");
+            list.textContent = ""
         })
+
+
     </script>
 </html>
