@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
 const clients = new Set();
 
+var userAnswers = []
 io.on("connection", (socket) => {
   // Create user
   const user = {
@@ -35,6 +36,17 @@ io.on("connection", (socket) => {
 
     socket.broadcast.emit('userJoined', user);
   })
+
+  socket.on("userPicked", (question, choice) => {
+    questions.forEach((eQuestion) => {
+      if (eQuestion.question == question) {
+        if (eQuestion.correct == choice) {
+          user.points += 1
+          io.emit("awardPoints", user)
+        }
+      }
+    });
+  });
 
   socket.on('disconnect', () => {
     clients.delete(user);
@@ -200,10 +212,6 @@ var questions = [
       correct: "sec^2(x)tan(x)"
   }
 ];
-
-io.on("skibidiQuestions", (choice) => {
-  console.log('Server running at http://localhost:3000');
-});
 
 setInterval(() => {
   var randomIndex = Math.floor(Math.random() * questions.length);
