@@ -21,7 +21,7 @@
         dick.addEventListener('message', (event) => {
             const lister = document.createElement("li");
             const client = event.data
-            lister.textContent = client.name;
+            lister.textContent = client.user.name;
             list.appendChild(lister);
             
         })
