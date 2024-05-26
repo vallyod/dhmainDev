@@ -18,7 +18,7 @@
         socket.on("userJoined", (obj) => {
             const lister = document.createElement("li");
             lister.textContent = obj.name;
-            console.log(obj.name);
+
             list.appendChild(lister);
         })
     </script>
