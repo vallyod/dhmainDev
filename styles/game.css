@@ -39,3 +39,11 @@ img {
     margin-top: 10px; /* Adjust margin as needed */
     border-radius: 50%; /* Make the image circular */
 }
+
+#question-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+}
