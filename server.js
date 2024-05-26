@@ -14,17 +14,34 @@ app.get('/',  (req, res) => {
 })
 
 app.ws('/socket', function(ws, req) {
-  clients.add(ws)
-  console.log("someone joined");
-  
-  
+  // Create user
+  var user = new Object();
+  user.webSocket = ws
+  user.name = "placeholder"
+  user.image = "image placeholder"
+  user.removing = false
 
+  // Tell clients new client joined
+  for (const client of clients) {
+    client.webSocket.send(user)
+  }
+
+  // Add new client to clients
+  clients.add(user)
+
+  // For recieving answers
   ws.on('message', function(msg) {
     const message = JSON.parse(msg)
   });
 
+  // Leaving
   ws.on('close', () => {
-    clients.delete(ws);
+    clients.delete(object);
+    user.removing = true
+
+    for (const client of clients) {
+      client.send(object)
+    }  
   });
 });
 
