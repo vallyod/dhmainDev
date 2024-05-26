@@ -11,10 +11,6 @@ app.use(express.static('public'));
 app.use(express.static('styles'));
 
 app.get('/', (req, res) => {
-  res.sendFile(join(__dirname, 'pages', 'login.html'));
-});
-
-app.get('/game', (req, res) => {
   //res.sendFile('public/FP.html');
   res.sendFile(join(__dirname, 'pages', 'game.html'));
 });
@@ -25,18 +21,19 @@ io.on("connection", (socket) => {
   // Create user
   const user = {
     name: 'None Given',
-    image: 'Image'
+    points: 0
   };
 
-  socket.on("newuser", (name) => {
-    // Add user to clients
+  socket.on("newUser", (name) => { 
+    user.name = name
+
     clients.add(user);
 
     clients.forEach((existingUser) => {
-      io.emit('userJoined', existingUser);
+      socket.emit('userJoined', existingUser);
     });
 
-    io.emit('userJoined', user);
+    socket.broadcast.emit('userJoined', user);
   })
 })
 

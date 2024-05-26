@@ -17,7 +17,8 @@
             const socket = io();
             const input = document.getElementById("text");
             const button = document.getElementById("button");
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault()
                 if(input.value != ""){
                     window.location.href = "\game";
                 }

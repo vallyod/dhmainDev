@@ -1,10 +1,19 @@
 body{
     /*background-color: rgb(0, 0, 0);*/
-    background-color: white;
+    background-color: beige;
 }
 
 h1{
     color: blue;
+}
+
+#crest{
+    margin-top: 90px;
+}
+
+img{
+    margin-top: -90px;
+    margin-left: 350px;
 }
 
 /*#list { list-style-type: none; margin: 0; padding: 0; }
