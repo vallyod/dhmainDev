@@ -8,6 +8,7 @@ const server = createServer(app);
 const io = new Server(server);
 
 app.get('/', (req, res) => {
+  //res.sendFile('public/FP.html');
   res.sendFile(join(__dirname, 'public', 'index.html'));
 });
 
