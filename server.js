@@ -12,7 +12,7 @@ app.use(express.static('styles'))
 
 app.get('/', (req, res) => {
   //res.sendFile('public/FP.html');
-  res.sendFile(join(__dirname, 'pages', 'game.html'));
+  res.sendFile(join(__dirname, 'pages', 'login.html'));
 });
 
 var clients = new Set()
