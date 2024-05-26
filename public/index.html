@@ -18,9 +18,12 @@
             //ws.send("message")
         })
 
-        ws.addEventListener('userjoined', (event) => {
-            const list = document.createElement("li");
-            list.textContent = ""
+        ws.addEventListener('message', (event) => {
+            const lister = document.createElement("li");
+            const client = event.data
+            lister.textContent = client.name;
+            list.appendChild(lister);
+            
         })
 
 
