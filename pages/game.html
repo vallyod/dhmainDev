@@ -55,8 +55,26 @@
             textId.value = obj.question;
 
             for(let i = 0; i < obj.answers.length; i++) {
-                document.getElementById("questions" + (i + 1)) = obj.answers[i]
+                document.getElementById("questions" + (i + 1)).value = obj.answers[i]
+                document.getElementById("option" + (i + 1)).addEventListener("click", ()=> {
+                    socket.emit("userPicked", (textId.value, obj.answers[i]))
+                })
             }
+
+            button1.addEventListener("click", ()=> {
+                socket.emit("userpicked", (textId.value, obj))
+            })
         });
+        
+        socket.on("awardPoints", (obj) => {
+            const liElements = list.querySelectorAll('li');
+
+        // Log the LI elements
+        liElements.forEach((li) => {
+            console.log(li.textContent);
+            li.textContent = obj.name + " | " + obj.points + " points.";
+
+        });
+        })
     </script>
 </html>
