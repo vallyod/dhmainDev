@@ -16,15 +16,10 @@ app.get('/', (req, res) => {
 
 app.get('/game', (req, res) => {
   //res.sendFile('public/FP.html');
-  res.sendFile(join(__dirname, 'pages', 'login.html'));
+  res.sendFile(join(__dirname, 'pages', 'game.html'));
 });
 
-app.get('/game', (req, res) => {
-  //res.sendFile('public/FP.html');
-  res.sendFile(join(__dirname, 'pages', 'login.html'));
-});
-
-const clients = new Map();
+const clients = new Set();
 
 io.on('connection', (socket) => {
   // Create user
@@ -35,7 +30,7 @@ io.on('connection', (socket) => {
   };
 
   // Add user to clients
-  clients.set(user);
+  clients.add(user);
 
   clients.forEach((existingUser) => {
     socket.emit('userJoined', existingUser);
