@@ -40,7 +40,7 @@ app.ws('/socket', function(ws, req) {
     user.removing = true
 
     for (const client of clients) {
-      client.send(object)
+      client.send(user)
     }  
   });
 });
