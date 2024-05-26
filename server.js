@@ -14,11 +14,13 @@ app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'public', 'FP.html'));
 });
 
+var clients = new Set()
 io.on('connection', (socket) => {
   console.log('a user connected');
 
   // Create user
   var user = new Object();
+  user.socket = socket
   user.name = "placeholder"
   user.image = "image placeholder"
 
