@@ -35,15 +35,13 @@ io.on("connection", (socket) => {
 
     socket.broadcast.emit('userJoined', user);
   })
+
+  socket.on('disconnect', () => {
+    clients.delete(user);
+  
+    io.emit('userDeleted', user);
+  });
 })
-
-/*
-socket.on('disconnect', () => {
-  clients.delete(user);
-
-  io.emit('userDeleted', user);
-});
-*/
 
 server.listen(3000, () => {
   console.log('Server running at http://localhost:3000');
