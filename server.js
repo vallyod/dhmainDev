@@ -15,6 +15,8 @@ app.get('/',  (req, res) => {
 
 app.ws('/socket', function(ws, req) {
   clients.add(ws)
+  console.log("someone joined");
+  
 
   ws.on('message', function(msg) {
     const message = JSON.parse(msg)
