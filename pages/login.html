@@ -21,6 +21,7 @@
                 if(input.value != ""){
                     window.location.href = "\game";
                 }
+                
                 socket.emit("newuser", input.value);
             });
         </script>

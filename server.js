@@ -21,30 +21,32 @@ app.get('/game', (req, res) => {
 
 const clients = new Set();
 
-io.on('connection', (socket) => {
+io.on("connection", (socket) => {
   // Create user
   const user = {
-    id: socket.id,
-    name: 'placeholder',
-    image: 'image placeholder'
+    name: 'None Given',
+    image: 'Image'
   };
 
-  // Add user to clients
-  clients.add(user);
+  socket.on("newuser", (name) => {
+    // Add user to clients
+    clients.add(user);
 
-  clients.forEach((existingUser) => {
-    socket.emit('userJoined', existingUser);
-  });
+    clients.forEach((existingUser) => {
+      io.emit('userJoined', existingUser);
+    });
 
-  socket.broadcast.emit('userJoined', user);
+    io.emit('userJoined', user);
+  })
+})
 
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    clients.delete(user);
+/*
+socket.on('disconnect', () => {
+  clients.delete(user);
 
-    io.emit('userDeleted', user);
-  });
+  io.emit('userDeleted', user);
 });
+*/
 
 server.listen(3000, () => {
   console.log('Server running at http://localhost:3000');
